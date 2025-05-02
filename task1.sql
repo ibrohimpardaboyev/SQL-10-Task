@@ -142,11 +142,6 @@ order by total_income desc
 select 
 	customer_id,
 	CONCAT(
-		'last payment made ',
-		datediff(year,max(order_date),getdate()),
-		' years ',
-		datediff(MONTH,max(order_date),getdate()),
-		' months ',
 		datediff(day,max(order_date),getdate()),
 		' days ago '
 	)
@@ -167,7 +162,7 @@ with prev_dates as (
 )
 select 
 	customer_id,
-	concat('frequency is ',avg(DATEDIFF(YEAR,prev_date,payment_date)*365.25*24 + DATEDIFF(MONTH,prev_date,payment_date)*30*24 + DATEDIFF(HOUR,prev_date,payment_date)),' hours')
+	concat(DATEDIFF(HOUR,prev_date,payment_date)),' hours')
 from 
 prev_dates where prev_date is not null group by customer_id
 
