@@ -159,7 +159,7 @@ begin
 	from 
 		whole_data 
 	where 
-		status = 'unpaid' and (datediff(day,purchase_date,getdate()) >= 1 or datediff(MONTH,purchase_date,getdate()) >= 1 or datediff(YEAR,purchase_date,getdate()) >= 1) 
+		status = 'unpaid' and datediff(day,purchase_date,getdate()) >= 1
 end 
 
 drop procedure unpaid_selector
